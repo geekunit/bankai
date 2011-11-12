@@ -1,0 +1,66 @@
+package eu.codebits.bonkai.domain;
+
+class Bonkai;
+
+class User {
+  String name;
+}
+
+class Document {
+  String name;
+}
+
+class Entry {
+  Integer id;
+  String timecode;
+}
+
+class Translation {
+  String text;
+}
+
+class Language {
+  String locale;
+  String description;
+}
+
+
+relation BonkaiHasUsers {
+  Bonkai playsRole bonkai { multiplicity 0..1; }
+  User playsRole user { multiplicity 0..*; }
+}
+
+relation BonkaiHasLanguages {
+  Bonkai playsRole bonkai { multiplicity 0..1; }
+  Language playsRole language { multiplicity 0..*; }
+}
+
+relation BonkaiHasDocuments {
+  Bonkai playsRole bonkai { multiplicity 0..1; }
+  Document playsRole document { multiplicity 0..*; }
+}
+
+relation UserIsSkilledInLanguages {
+  User playsRole user { multiplicity 0..*; }
+  Language playsRole language { multiplicity 0..*; }
+}
+
+relation TranslationIsMadeOnALanguage {
+  Translation playsRole translation { multiplicity 0..*; }
+  Language playsRole language { multiplicity 0..1; }
+}
+
+relation DocumentHasEntries {
+  Document playsRole document { multiplicity 0..1; }
+  Entry playsRole entry { multiplicity 0..*; }
+}
+
+relation DocumentHasTranslatedLanguages {
+  Document playsRole document { multiplicity 0..*; }
+  Language playsRole language { multiplicity 0..*; }
+}
+
+relation EntryHasTranslations {
+  Entry playsRole entry { multiplicity 0..1; }
+  Translation playsRole translation { multiplicity 0..*; }
+}
